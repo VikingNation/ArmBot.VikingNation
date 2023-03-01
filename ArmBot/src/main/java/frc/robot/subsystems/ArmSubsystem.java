@@ -50,24 +50,29 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
                 ArmConstants.kMaxVelocityRadPerSecond,
                 ArmConstants.kMaxAccelerationRadPerSecSquared)),
         0);
-    // Note:  What code is using initialPostion?
+        
+
+    // ProfiledPIDControler constructor calls setGoal with initialPostion
+    // Question : Should initialPositon be set to ArmConstants.kArmOffestRads in above vice
+    //            calling setGoal(ArmConstants.kArmOffsetRads) below?
 
     // Set if feedfoward is needed for the armSystem
     m_useFeedForword = useFeedForward;
+
     // Set the position conversastion a factor to return radians and not encoder ticks
     m_encoder.setPositionConversionFactor(ArmConstants.kEncoderDistancePerPulse);
     
     // Is this needed to convert velocity?
-    m_encoder.setVelocityConversionFactor(ArmConstants.kEncoderDistancePerPulse/60);
+    //m_encoder.setVelocityConversionFactor(ArmConstants.kEncoderDistancePerPulse/60);
     
 
     // Set the position of the motor encoder to be inital resting postion of the arm
-   
     // Start arm at rest in neutral position
     setGoal(ArmConstants.kArmOffsetRads);
      
     // Enable the arm at the start
     //enable();
+    
     
   }
 
