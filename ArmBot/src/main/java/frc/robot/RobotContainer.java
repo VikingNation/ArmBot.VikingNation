@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems
   
-  private final ArmSubsystem m_robotArm = new ArmSubsystem(false);
+  private final ArmSubsystem m_robotArm = new ArmSubsystem(true);
 
   // The driver's controller
   CommandXboxController m_driverController =
