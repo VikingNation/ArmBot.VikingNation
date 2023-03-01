@@ -72,6 +72,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
      
     // Enable the arm at the start
     //enable();
+    System.out.println("Is Enabled? : " + this.isEnabled());
     
     
   }
