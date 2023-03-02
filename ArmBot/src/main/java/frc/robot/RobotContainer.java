@@ -74,7 +74,19 @@ public class RobotContainer {
                   System.out.println("Button B");
                 },
                 m_robotArm));
+     m_driverController
+        .x()
+        .onTrue(
+            Commands.runOnce(
+                () -> {
+                  m_robotArm.setGoal(3);
+                  m_robotArm.enable();
+                  System.out.println("Button X");
+                },
+                m_robotArm));
 
+
+               
     // Disable the arm controller when Y is pressed.
     m_driverController.y().onTrue(Commands.runOnce(m_robotArm::disable));
   

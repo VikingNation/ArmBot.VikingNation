@@ -17,7 +17,7 @@ public final class Constants {
   public static final class ArmConstants {
     public static final int kMotorPort = 3;
 
-    public static final double kP = 1;
+    public static final double kP = 4.0;
 
     // These are fake gains; in actuality these must be determined individually for each robot
     public static final double kSVolts = 0.0; // was 1.0
