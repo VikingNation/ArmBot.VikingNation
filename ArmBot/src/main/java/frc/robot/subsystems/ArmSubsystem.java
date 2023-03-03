@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.ProfiledPIDSubsystem;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 /** A robot arm subsystem that moves with a motion profile. */
 public class ArmSubsystem extends ProfiledPIDSubsystem {
@@ -57,6 +58,8 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
     //            calling setGoal(ArmConstants.kArmOffsetRads) below?
 
     // Set if feedfoward is needed for the armSystem
+
+    m_motor.setIdleMode(IdleMode.kCoast);
     m_useFeedForword = useFeedForward;
 
     // Set the position conversastion a factor to return radians and not encoder ticks
@@ -84,6 +87,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
     // Add the feedforward to the PID output to get the motor output
     SmartDashboard.putNumber("Motor output", output);
     SmartDashboard.putNumber("Motor feedforward", feedforward);
+    SmartDashboard.putNumber("Encoder position", m_encoder.getPosition());
 
     if (m_useFeedForword) {
       m_motor.setVoltage(output + feedforward);
