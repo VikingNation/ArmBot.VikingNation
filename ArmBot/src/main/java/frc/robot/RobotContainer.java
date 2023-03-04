@@ -58,7 +58,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal((Math.PI / 2) / ArmConstants.kPositionConversionFactor);
+                  m_robotArm.setGoal(ArmConstants.kMidArmPosition);
                   m_robotArm.enable();
                   System.out.println("Button A");
                 },
@@ -70,7 +70,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(Constants.ArmConstants.kArmOffsetRads);
+                  m_robotArm.setGoal(Constants.ArmConstants.kArmOffset);
                   m_robotArm.enable();
                   System.out.println("Button B");
                 },
@@ -80,14 +80,11 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(Math.PI / ArmConstants.kPositionConversionFactor);
+                  m_robotArm.setGoal(ArmConstants.kHighArmPosition);
                   m_robotArm.enable();
                   System.out.println("Button X");
                 },
                 m_robotArm));
-
-
-               
     // Disable the arm controller when Y is pressed.
     m_driverController.y().onTrue(Commands.runOnce(m_robotArm::disable));
   

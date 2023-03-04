@@ -25,16 +25,19 @@ public final class Constants {
     public static final double kVVoltSecondPerRad = 0.0; // was 0.5
     public static final double kAVoltSecondSquaredPerRad = 0.0; // was 0.1
 
-    public static final double kMaxVelocityRadPerSecond = 3.0;
+    public static final double kMaxVelocityRadPerSecond = 6.0;
     public static final double kMaxAccelerationRadPerSecSquared = 10.0;
 
-    
-    public static final int kEncoderCPR = 1;
-    public static final double kPositionConversionFactor = 2.0 * Math.PI / kEncoderCPR;
+    public static final double kPositionConversionFactor = 2.0 * Math.PI;
+    public static final double kGearboxRatio = 10.0;
+    //public static final double kArmOffset = ((Math.PI / 4.0) * kGearboxRatio);
+    public static final double kArmOffset = 45.0 / 360.0 * kGearboxRatio;
+
+    public static final double kMidArmPosition = 90.0 / 360.0 * kGearboxRatio;
+    public static final double kHighArmPosition = 180.0 / 360.0 * kGearboxRatio;
 
     // The offset of the arm from the horizontal in its neutral position,
     // measured from the horizontal
-    public static final double kArmOffsetRads = (Math.PI / 4.0) / kPositionConversionFactor;
   }
 
   public static final class AutoConstants {

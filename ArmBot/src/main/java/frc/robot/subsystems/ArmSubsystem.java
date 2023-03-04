@@ -59,6 +59,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
     // Set if feedfoward is needed for the armSystem
 
+    m_motor.restoreFactoryDefaults();
     m_motor.setIdleMode(IdleMode.kCoast);
     m_useFeedForword = useFeedForward;
 
@@ -73,7 +74,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
     // Set the position of the motor encoder to be inital resting postion of the arm
     // Start arm at rest in neutral position
-    setGoal(ArmConstants.kArmOffsetRads);
+    setGoal(ArmConstants.kArmOffset);
      
     // Enable the arm at the start
     //enable();
@@ -102,7 +103,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    return m_encoder.getPosition() + ArmConstants.kArmOffsetRads;
+    return m_encoder.getPosition() + ArmConstants.kArmOffset;
     //return (m_encoder.getPosition() + ArmConstants.kArmOffsetRads) / ArmConstants.kPositionConversionFactor  ;
   }
 
