@@ -22,19 +22,19 @@ public final class Constants {
     // These are fake gains; in actuality these must be determined individually for each robot
     public static final double kSVolts = 0.0; // was 1.0
     public static final double kGVolts = 0.0; // was 1.0
-    public static final double kVVoltSecondPerRad = 0.5;
-    public static final double kAVoltSecondSquaredPerRad = 0.1;
+    public static final double kVVoltSecondPerRad = 0.0; // was 0.5
+    public static final double kAVoltSecondSquaredPerRad = 0.0; // was 0.1
 
-    public static final double kMaxVelocityRadPerSecond = 3;
-    public static final double kMaxAccelerationRadPerSecSquared = 10;
+    public static final double kMaxVelocityRadPerSecond = 3.0;
+    public static final double kMaxAccelerationRadPerSecSquared = 10.0;
 
     
-    public static final int kEncoderPPR = 42;
-    public static final double kEncoderDistancePerPulse = 2.0 * Math.PI / kEncoderPPR;
+    public static final int kEncoderCPR = 1;
+    public static final double kPositionConversionFactor = 2.0 * Math.PI / kEncoderCPR;
 
     // The offset of the arm from the horizontal in its neutral position,
     // measured from the horizontal
-    public static final double kArmOffsetRads = 0.5;
+    public static final double kArmOffsetRads = (Math.PI / 4.0) / kPositionConversionFactor;
   }
 
   public static final class AutoConstants {

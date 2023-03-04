@@ -58,7 +58,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(2 * Math.PI / 21);
+                  m_robotArm.setGoal((Math.PI / 2) / ArmConstants.kPositionConversionFactor);
                   m_robotArm.enable();
                   System.out.println("Button A");
                 },
@@ -80,7 +80,7 @@ public class RobotContainer {
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(3);
+                  m_robotArm.setGoal(Math.PI / ArmConstants.kPositionConversionFactor);
                   m_robotArm.enable();
                   System.out.println("Button X");
                 },

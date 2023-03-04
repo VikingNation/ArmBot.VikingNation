@@ -63,8 +63,10 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
     m_useFeedForword = useFeedForward;
 
     // Set the position conversastion a factor to return radians and not encoder ticks
-    m_encoder.setPositionConversionFactor(ArmConstants.kEncoderDistancePerPulse);
-    
+    //m_encoder.setPositionConversionFactor(ArmConstants.kPositionConversionFactor);
+    m_encoder.setPositionConversionFactor(1.0);
+    System.out.println("encoder position factor: " + m_encoder.getPositionConversionFactor());
+
     // Is this needed to convert velocity?
     //m_encoder.setVelocityConversionFactor(ArmConstants.kEncoderDistancePerPulse/60);
     
@@ -100,8 +102,8 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    //return m_encoder.getDistance() + ArmConstants.kArmOffsetRads;
     return m_encoder.getPosition() + ArmConstants.kArmOffsetRads;
+    //return (m_encoder.getPosition() + ArmConstants.kArmOffsetRads) / ArmConstants.kPositionConversionFactor  ;
   }
 
   public void updateSmartDash() {
