@@ -53,34 +53,20 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
         0);
         
 
-    // ProfiledPIDControler constructor calls setGoal with initialPostion
-    // Question : Should initialPositon be set to ArmConstants.kArmOffestRads in above vice
-    //            calling setGoal(ArmConstants.kArmOffsetRads) below?
-
     // Set if feedfoward is needed for the armSystem
-
     m_motor.restoreFactoryDefaults();
     m_motor.setIdleMode(IdleMode.kCoast);
+
     m_useFeedForword = useFeedForward;
 
-    // Set the position conversastion a factor to return radians and not encoder ticks
-    //m_encoder.setPositionConversionFactor(ArmConstants.kPositionConversionFactor);
-    m_encoder.setPositionConversionFactor(1.0);
+    // Note: Default behavior of getPosition is to return units of rotations
+    m_encoder.setPositionConversionFactor(Constants.ArmConstants.kPositionConversionFactor);
     System.out.println("encoder position factor: " + m_encoder.getPositionConversionFactor());
-
-    // Is this needed to convert velocity?
-    //m_encoder.setVelocityConversionFactor(ArmConstants.kEncoderDistancePerPulse/60);
-    
 
     // Set the position of the motor encoder to be inital resting postion of the arm
     // Start arm at rest in neutral position
     setGoal(ArmConstants.kArmOffset);
-     
-    // Enable the arm at the start
-    //enable();
-    System.out.println("Is Enabled? : " + this.isEnabled());
-    
-    
+             
   }
 
   @Override
@@ -103,13 +89,20 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    return m_encoder.getPosition() + ArmConstants.kArmOffset;
-    //return (m_encoder.getPosition() + ArmConstants.kArmOffsetRads) / ArmConstants.kPositionConversionFactor  ;
+    
+    double val = m_encoder.getPosition() + ArmConstants.kArmOffset;
+    return (val);
   }
 
   public void updateSmartDash() {
     SmartDashboard.putNumber("Encoder Postion", m_encoder.getPosition());
     SmartDashboard.putNumber("Encoder Velocity", m_encoder.getVelocity());
 
+  }
+
+  public void setNewGoal (double goal) {
+    double currentPos = getMeasurement();
+    System.out.println("Rotations to get to new goal: " + (goal-currentPos)/ArmConstants.kPositionConversionFactor);
+    setGoal(goal);
   }
 }
