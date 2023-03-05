@@ -40,6 +40,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
   // Boolean is to control if feedfoward is used in UseOutput method
   private boolean m_useFeedForword;
 
+  private double previousGoal;
   /** Create a new ArmSubsystem. */
   public ArmSubsystem(boolean useFeedForward) {
     super(
@@ -65,6 +66,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
     // Set the position of the motor encoder to be inital resting postion of the arm
     // Start arm at rest in neutral position
+    previousGoal=ArmConstants.kArmOffset;
     setGoal(ArmConstants.kArmOffset);
              
   }
@@ -76,7 +78,6 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
     // Add the feedforward to the PID output to get the motor output
     SmartDashboard.putNumber("Motor output", output);
     SmartDashboard.putNumber("Motor feedforward", feedforward);
-    SmartDashboard.putNumber("Encoder position", m_encoder.getPosition());
 
     if (m_useFeedForword) {
       m_motor.setVoltage(output + feedforward);
@@ -89,20 +90,23 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    
     double val = m_encoder.getPosition() + ArmConstants.kArmOffset;
     return (val);
   }
 
   public void updateSmartDash() {
-    SmartDashboard.putNumber("Encoder Postion", m_encoder.getPosition());
-    SmartDashboard.putNumber("Encoder Velocity", m_encoder.getVelocity());
+    SmartDashboard.putNumber("Controller Postion", this.getController().getGoal().position);
+    SmartDashboard.putNumber("Controlelr Velocity", this.getController().getGoal().velocity);
+    SmartDashboard.putNumber("Encoder position", m_encoder.getPosition());
+    SmartDashboard.putNumber("Encover veliocitdy", m_encoder.getPosition());
+    
 
   }
 
   public void setNewGoal (double goal) {
-    double currentPos = getMeasurement();
-    System.out.println("Rotations to get to new goal: " + (goal-currentPos)/ArmConstants.kPositionConversionFactor);
+    
+    System.out.println("Rotations to get to new goal: " + (goal-previousGoal)/ArmConstants.kPositionConversionFactor);
+    previousGoal=goal;
     setGoal(goal);
   }
 }
