@@ -32,17 +32,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
-    // Configure default commands
-    // Set the default drive command to split-stick arcade drive
-    //m_robotDrive.setDefaultCommand(
-        // A split-stick arcade command, with forward/backward controlled by the left
-        // hand, and turning controlled by the right.
-    //    Commands.run(
-    //        () ->
-    //             m_robotDrive.arcadeDrive(
-    //                -m_driverController.getLeftY(), -m_driverController.getRightX()),
-    //        m_robotDrive));
   }
 
   /**
@@ -52,37 +41,38 @@ public class RobotContainer {
    * JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Move the arm to 2 radians above horizontal when the 'A' button is pressed.
-    m_driverController
-        .a()
-        .onTrue(
-            Commands.runOnce(
-                () -> {
-                  m_robotArm.setGoal(ArmConstants.kMidArmPosition);
-                  m_robotArm.enable();
-                  System.out.println("Button A");
-                },
-                m_robotArm));
-
+    // Map buttons to goto Arm offset, Mid, and High locations
     // Move the arm to neutral position when the 'B' button is pressed.
     m_driverController
         .b()
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(Constants.ArmConstants.kArmOffset);
+                  m_robotArm.setNewGoal(Constants.ArmConstants.kArmOffset);
                   m_robotArm.enable();
-                  System.out.println("Button B");
+                  System.out.println("Button B: Going to offset Location");
                 },
                 m_robotArm));
+    
+    m_driverController
+        .a()
+        .onTrue(
+            Commands.runOnce(
+                () -> {
+                  m_robotArm.setNewGoal(ArmConstants.kMidArmPosition);
+                  m_robotArm.enable();
+                  System.out.println("Button A: Going to MidLocation");
+                },
+                m_robotArm));
+
      m_driverController
         .x()
         .onTrue(
             Commands.runOnce(
                 () -> {
-                  m_robotArm.setGoal(ArmConstants.kHighArmPosition);
+                  m_robotArm.setNewGoal(ArmConstants.kHighArmPosition);
                   m_robotArm.enable();
-                  System.out.println("Button X");
+                  System.out.println("Button X: Going to high Location");
                 },
                 m_robotArm));
     // Disable the arm controller when Y is pressed.
