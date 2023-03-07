@@ -91,6 +91,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
   @Override
   public double getMeasurement() {
     double val = m_encoder.getPosition() + ArmConstants.kArmOffset;
+    
     return (val);
   }
 
@@ -104,8 +105,11 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
   }
 
   public void setNewGoal (double goal) {
-    
-    System.out.println("Rotations to get to new goal: " + (goal-previousGoal)/ArmConstants.kPositionConversionFactor);
+    System.out.println("Previous Goal:" + previousGoal);
+    System.out.println("New Goal: " + goal);
+    System.out.println("Rotations to get to new goal: " + (goal-previousGoal) * Constants.ArmConstants.kPositionConversionFactor);
+    System.out.println("");
+
     previousGoal=goal;
     setGoal(goal);
   }

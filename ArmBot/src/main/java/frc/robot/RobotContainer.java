@@ -41,7 +41,7 @@ public class RobotContainer {
    * JoystickButton}.
    */
   private void configureButtonBindings() {
-    // Map buttons to goto Arm offset, Mid, and High locations
+    // Map buttons to goto Arm offset, Mid, and High locationsz
     // Move the arm to neutral position when the 'B' button is pressed.
     m_driverController
         .b()
