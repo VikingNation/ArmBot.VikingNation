@@ -29,13 +29,11 @@ public final class Constants {
     public static final double kMaxAccelerationRadPerSecSquared = 10.0;
 
     public static final double kGearboxRatio = 10.0;
-    public static final double kPositionConversionFactor = 1/(2* Math.PI);
-    
-    
+    public static final double kPositionConversionFactor = 1.0;
   
-    public static final double kArmOffset = -(0.5*Math.PI )*kGearboxRatio;
-    public static final double kMidArmPosition = (0.0*Math.PI*kGearboxRatio);
-    public static final double kHighArmPosition = (Math.PI)*kGearboxRatio;
+    public static final double kArmOffset = Math.toRadians(-90.0);
+    public static final double kMidArmPosition = Math.toRadians(90);
+    public static final double kHighArmPosition = Math.toRadians(180);
 
     // The offset of the arm from the horizontal in its neutral position,
     // measured from the horizontal

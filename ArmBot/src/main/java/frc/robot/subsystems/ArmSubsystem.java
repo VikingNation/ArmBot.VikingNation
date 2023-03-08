@@ -90,9 +90,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
   @Override
   public double getMeasurement() {
-    double val = m_encoder.getPosition() + ArmConstants.kArmOffset;
-    
-    return (val);
+    return (m_encoder.getPosition() * (2.0 * Math.PI / ArmConstants.kGearboxRatio) + ArmConstants.kArmOffset);
   }
 
   public void updateSmartDash() {
