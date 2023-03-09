@@ -15,7 +15,7 @@ package frc.robot;
 public final class Constants {
 
   public static final class ArmConstants {
-    public static final int kMotorPort = 3;
+    public static final int kMotorPort = 8;
 
     public static final double kP = 4.0;
 
@@ -32,8 +32,8 @@ public final class Constants {
     public static final double kPositionConversionFactor = 1.0;
   
     public static final double kArmOffset = Math.toRadians(-90.0);
-    public static final double kMidArmPosition = Math.toRadians(90);
-    public static final double kHighArmPosition = Math.toRadians(180);
+    public static final double kMidArmPosition = Math.toRadians(0);
+    public static final double kHighArmPosition = Math.toRadians(90);
 
     // The offset of the arm from the horizontal in its neutral position,
     // measured from the horizontal

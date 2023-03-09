@@ -66,7 +66,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
 
     // Set the position of the motor encoder to be inital resting postion of the arm
     // Start arm at rest in neutral position
-    previousGoal=ArmConstants.kArmOffset;
+    previousGoal = ArmConstants.kArmOffset;
     setGoal(ArmConstants.kArmOffset);
              
   }
@@ -83,9 +83,7 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
       m_motor.setVoltage(output + feedforward);
     } else {
       m_motor.setVoltage(output);
-
     }
-
   }
 
   @Override
@@ -94,12 +92,10 @@ public class ArmSubsystem extends ProfiledPIDSubsystem {
   }
 
   public void updateSmartDash() {
-    SmartDashboard.putNumber("Controller Postion", this.getController().getGoal().position);
-    SmartDashboard.putNumber("Controlelr Velocity", this.getController().getGoal().velocity);
+    SmartDashboard.putNumber("Controller postion", this.getController().getGoal().position);
+    SmartDashboard.putNumber("Controller velocity", this.getController().getGoal().velocity);
     SmartDashboard.putNumber("Encoder position", m_encoder.getPosition());
-    SmartDashboard.putNumber("Encover veliocitdy", m_encoder.getPosition());
-    
-
+    SmartDashboard.putNumber("Encoder velocity", m_encoder.getPosition());
   }
 
   public void setNewGoal (double goal) {
